@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+<section style="height:100%; margin-bottom:250px">
+      <div class="container" >
+        <h1 style=" text-align: center;">Class Routine</h1><p>
+					Please Choose your Department , Year
+				</p><br />
+            <div class="row">
+              <div class="col col-md-6 col-lg-4 mx-auto">
+               <form method="POST">
+                    {% csrf_token %}
+                <select name="depp"  class="form-control">
+                <option>Select Department</option>
+                {% for dep in trades %}
+                    <option value="{{dep.dep}}">{{dep.dep}}</option>
+                {% endfor %}
+                 </select>
+                </div>
+                <div class="col col-md-6 col-lg-4">
+
+                  <select name="year" class="form-control">
+                  <option>Select Year</option>
+                  {% for year in years %}
+                  <option value="{{year.year}}">{{year.year}}</option>
+                  {% endfor %}
+                  </select>
+                </div>
+                  <div class="col col-md-6 col-lg-4 ">
+                    <select name="semm" class="form-control">
+                    <option>Select Semester</option>
+                    {% for sem in sems %}
+                    <option value="{{sem.sem}}">{{sem.sem}}</option>
+                    {% endfor %}
+                    </select>
+                    </div>
+              </div>
+              <br>
+            <center> 
+                <input class="btn btn-primary btn-sm" type="submit" value="Save">
+                <a class="btn btn-danger btn-sm"href="../">Back</a>
+            </center>
+            </form>
+			</div>
+
+        <div style="margin-top: 30px;">
+					<div class="nearby-user">
+						<div class="row">
+							<div class="col col-lg-2">
+
+							</div>
+							<div class="col col-lg-8">
+                                {% if routins %}
+                                  {% for routin in routins %}
+								<div class="row">
+										<div class="col-md-2 col-sm-2">
+											<img src="/static/images/timetable.png" alt="user" class="profile-photo-lg">
+										</div>
+										<div class="col-md-7 col-sm-7">
+											<h5><a href="#" class="profile-link">Class Routine</a></h5>
+											<p>Department of {{routin.department}}</p>
+											<p class="text-muted">{{routin.year}} year</p>
+										</div>
+										<div class="col-md-3 col-sm-3">
+											 <a class="btn btn-primary pull-right" target="_blank" href="{{routin.file.url}}">Downloaded</a>
+										</div>
+								</div>
+                                    {% endfor %}
+                                {% endif %}
+							</div>
+							<div class="col col-lg-2">
+
+							</div>
+						</div>
+					</div>
+			</div>
+    </section>
+{% endblock  %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                    <div class="alert alert-danger" role = "alert">
+                        {{message}}
+                    </div>
+                {% endif %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                    <div class="alert alert-success" role = "alert">
+                        {{message}}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %} 
+    </div>
+		<section id="banner" style="height:100%">
+				<!-- Sign Up Form
+				================================================= -->
+				<div class="sign-up-form" style="height:100%">
+					<a href="{% url 'home' %}" class="logo"><h2 class="text-white">BUIESPACE</h2></a>
+					<!-- <h2 class="text-white">Explore BUIESPACE</h2> -->
+					<div class="line-divider"></div>
+					<div class="form-wrapper">
+						<p class="signup-text">Signup now and explore the Engineering World </p>
+						<form method="POST">
+						{% csrf_token %} 
+							<fieldset class="form-group">
+								<input type="text" class="form-control" id="example-name" name="username" placeholder="Username.." required>
+							</fieldset>
+							<fieldset class="form-group">
+								<input type="text" class="form-control" id="example-name" name="first_name" placeholder="First Name.." required>
+							</fieldset>
+							<fieldset class="form-group">
+								<input type="text" class="form-control" id="example-name" name="last_name" placeholder="Last Name.." required>
+							</fieldset>
+							<fieldset class="form-group">
+								<input type="email" class="form-control" id="example-name" name="email" placeholder="Email Id .." required>
+							</fieldset>
+							<fieldset class="form-group">
+								<input type="password" class="form-control" id="example-name" name="password1" placeholder="Password.." required>
+							</fieldset>
+							<fieldset class="form-group">
+								<input type="password" class="form-control" id="example-email" name="password2" placeholder="Repeat your password.." required>
+							</fieldset>
+							<fieldset class="form-group">
+								<input class="btn-secondary" type="submit" value="submit">
+							</fieldset>
+						</form>
+					</div>
+					<a href="{% url 'signin' %}">Already have an account?</a>
+		</section>
+
+
+
+{% endblock  %}

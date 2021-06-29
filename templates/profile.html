@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="container">
+
+      <!-- Timeline
+      ================================================= -->
+      <div class="timeline">
+        <div class="timeline-cover">
+
+          <!--Timeline Menu for Large Screens-->
+          <div class="timeline-nav-bar hidden-sm hidden-xs">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="profile-info">
+                {% if profile.profile_pic %}
+                  <img src={{profile.profile_pic.url}} alt="" class="img-responsive profile-photo" />
+                {% else %}
+                  <img src="/media/profileImage/headshot.jpg" alt="" class="img-responsive profile-photo" />
+                {% endif %}
+                  
+                  <h3>{{profile.first_name}} {{profile.last_name}}</h3>
+                  <p class="text-muted">{{profile.department}}</p>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <ul class="list-inline profile-menu">
+                {% if user.id == profile.user.id %}
+                  <li><a href="/collageapp/editprofile/{{profile.user.id}}" class="active">Edit Profile</a></li>
+                {% endif %}
+                 <li><a class="active" href="../">Back</a></li>
+                </ul>
+              </div>
+            </div>
+          </div><!--Timeline Menu for Large Screens End-->
+
+          <!--Timeline Menu for Small Screens-->
+          <div class="navbar-mobile hidden-lg hidden-md">
+            <div class="profile-info">
+            {% if profile.profile_pic %}
+              <img src={{profile.profile_pic.url}} alt="" class="img-responsive profile-photo" />
+            {% else %}
+               <img src="/media/profileImage/headshot.jpg" alt="" class="img-responsive profile-photo" />
+            {% endif %}
+              <h4>{{profile.first_name}} {{profile.last_name}}</h4>
+              <p class="text-muted">Computer Science and Engineering Student</p>
+            </div>
+            <div class="mobile-menu">
+              <ul class="list-inline">
+				<li><a href="#" class="active">Profile</a></li>
+              </ul>
+            </div>
+          </div><!--Timeline Menu for Small Screens End-->
+
+        </div>
+        <div id="page-contents">
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-7">
+
+              <!-- About
+              ================================================= -->
+              <div class="about-profile">
+                <div class="about-content-block">
+                  <h4 class="grey"><i class="ion-ios-information-outline icon-in-title">
+                  </i>Personal Information&nbsp<span></span></h4>
+                  <p>{{profile.description}}</p>
+                </div>
+                <div class="about-content-block">
+									<h4 class="grey"><i class="ion-ios-briefcase-outline icon-in-title">
+									</i>Academic Details&nbsp<span></span></h4>
+									<p>Department : B.Tech in {{profile.department}}</p>
+									<p>Class Roll No : {{profile.roll}}</p>
+									<p>Passout Year : {{profile.passoutyr}}</p>
+							</div>
+							<div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+	</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+ <section style="height:100%">
+    <div class="container">
+        <h1 style=" text-align: center;">Study Meterial</h1><p>Please Choose your Department , Year</p><br />
+        <div class="row">
+            <form method="POST">
+                {% csrf_token %}
+            <div class="col col-md-6 col-lg-4 mx-auto">
+                <select name="depp"  class="form-control">
+                    <option>Select Department</option>
+                    {% for dep in trades %}
+                        <option value="{{dep.dep}}">{{dep.dep}}</option>
+                    {% endfor %}
+                 </select>
+            </div>
+            <div class="col col-md-6 col-lg-4">
+                <select name="year" class="form-control">
+                  <option>Select Year</option>
+                  {% for year in years %}
+                    <option value="{{year.year}}">{{year.year}}</option>
+                  {% endfor %}
+                </select>
+            </div>
+            <div class="col col-md-6 col-lg-4 ">
+                <select name="semm" class="form-control">
+                    <option>Select Semester</option>
+                    {% for sem in sems %}
+                        <option value="{{sem.sem}}">{{sem.sem}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+              <br>
+            <center> 
+                <br>
+                <br>
+                <input class="btn btn-primary btn-sm" type="submit" value="Save">
+                <a class="btn btn-danger btn-sm"href="../">Back</a>
+            </center>
+            </form>
+		</div>
+
+        {% if subjects %}
+			<div>
+				<div id="pape" align="center">
+					<h1 class="title">This is all you have to know this sem</h1>
+                    <br>
+						<div class="row">
+                        {% for subject in subjects %}
+							<div class="col-md-4">
+								<div class="panel panel-primary common">
+								  <div class="panel-heading">{{subject.subject}}</div>
+								  <div class="panel-body">
+									<p>Paper Code : <b>{{subject.paperCode}}</b></p>
+									<p>Credit Points : <b>{{subject.creditPoint}}</b></p>
+								 <a href="/collageapp/syllebus/{{subject.subject.id}}" class="btn btn-primary btn-sm">Syllabus</a>
+								  <a href="/collageapp/notes/{{subject.subject.id}}" class="btn btn-danger btn-sm">Study Notes</a>
+								  <a href="/collageapp/question/{{subject.subject.id}}" class="btn btn-success btn-sm">Question Paper</a><br><br>
+								  </div>
+								</div>
+							</div>
+							{% endfor %}
+						</div>
+				</div>
+            {% endif %}
+	</div>
+</section>
+{% endblock %}

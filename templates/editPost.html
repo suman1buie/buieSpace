@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h3 style="text-align:center" >Edit Artical</h3>
+<div style="display:flex;justify-content:center;width:100%;height: 90%;">
+
+    <div style="
+    display:flex;
+    justify-content:center;
+    height:70%; 
+    width:65%;
+    background-color: #c5eddc;
+    padding: 10px;
+    margin-top: 20px;
+    box-shadow: 15px 15px 10px  #b79beb;
+    border-radius: 15;
+    ">
+        
+    <form method="POST" enctype="multipart/form-data">
+     {% csrf_token %} 
+        {% for f in form %}
+          {{f.label_tag}} {{f}} {{f.errors|striptags}} <br> <br>
+        {% endfor %}
+    <input class="btn btn-success" type="submit" value="submit">
+
+    </form>
+</div>
+</div>
+{% endblock  %}

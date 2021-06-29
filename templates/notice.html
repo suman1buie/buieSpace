@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+  <section style="height:100%;">
+      <div class="container" >
+        <h1 style=" text-align: center;">Notice</h1><p>
+      </div><br />
+			<div id="paper" >
+					<div class="nearby-user">
+						<div class="row">
+							<div class="col col-lg-2">
+
+							</div>
+							<div class="col col-lg-8">
+                            {% for notice in Notices %}
+                                <div class="row">
+										<div class="col-md-2 col-sm-2">
+											<img src="/static/images/timetable.png" alt="user" class="profile-photo-lg">
+										</div>
+										<div class="col-md-7 col-sm-7">
+											<h5><a href="#" class="profile-link">Notice</a></h5>
+											<p>Department of {{notice.department}}</p>
+											<p class="text-muted">{{notice.year}} year</p>
+										</div>
+										<div class="col-md-3 col-sm-3">
+                                            <a class="btn btn-primary pull-right" target="_blank" href="{{notice.file.url}}">Downloaded</a>
+										</div>
+								</div>	
+                            
+                            {% endfor %}
+								
+							<div class="col col-lg-2"style="margin-top:40px">
+							</div>
+						</div>
+					</div>
+			</div>
+    </section>
+
+{% endblock  %}

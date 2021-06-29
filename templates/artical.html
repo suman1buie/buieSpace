@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1 style="text-align:center">Articals</h1>
+    <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                    <div class="alert alert-danger" role = "alert">
+                        {{message}}
+                    </div>
+                {% endif %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                    <div class="alert alert-success" role = "alert">
+                        {{message}}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %} 
+    </div>
+    <div id="page-contents">
+    	<div class="container">
+    		<div class="row">
+
+          <!-- Newsfeed Common Side Bar Left
+          ================================================= -->
+          {% if user.is_authenticated %}
+          <div class="col-md-3 static">
+              
+            <div class="profile-card">
+            {% if currentUser.profile_pic %}
+            	<img src={{currentUser.profile_pic.url}} alt="user" class="profile-photo" />
+            {% else %}
+            	<img src="/media/profileImage/headshot.jpg" alt="user" class="profile-photo" />
+            {% endif %}
+            	<h5><a href="/collageapp/profile/{{user.id}}" class="text-white">{{user}}</a></h5>
+            </div><!--profile card ends-->
+            <ul class="nav-news-feed">
+              <li><i class="icon ion-ios-people"></i><div><a href="/collageapp/profile/{{user.id}}">My Profile</a></div></li>
+            </ul><!--news-feed links ends-->
+            
+          </div>
+    			<div class="col-md-9">
+          {% endif %}
+
+
+            {% for artical in articals %}
+            <!-- Post Content
+            ================================================= -->
+            <div class="post-content">
+            {% if artical.image %}
+              <img src={{ artical.image.url }} alt="post-image" class="img-responsive post-image" />
+            {% endif %}
+              <div class="post-container">
+                <div class="post-detail">
+                  <div class="user-info">
+                    <h5><a href="/collageapp/profile/{{artical.uploded_by.id}}" class="profile-link">{{ artical.uploded_by }}</a></h5>
+                    <p class="text-muted">{{ artical.cr_date }}</p>
+                  </div>
+                  <div class="line-divider"></div>
+                  <div class="post-text">
+                    <p> {{ artical.description}} <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
+                  </div>
+                  <div class="line-divider"></div>
+                  {% if user.id == artical.uploded_by.id %}
+                    <a class="btn btn-success" href="/collageapp/editPost/{{artical.id}}">Edit</a>
+                     <a class="btn btn-danger" style="color:white" href="/collageapp/delete/{{artical.id}}">Delete</a>
+                  {% endif %}
+
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+    		</div>
+    	</div>
+    </div>
+{% endblock  %}
+

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+
+		<section id="banner" style="height:95%;">
+    <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                    <div class="alert alert-danger" role = "alert">
+                        {{message}}
+                    </div>
+                {% endif %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                    <div class="alert alert-success" role = "alert">
+                        {{message}}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %} 
+    </div>
+        <!-- Sign Up Form
+        ================================================= -->
+        <div class="sign-up-form" style="height:100%;">
+					<a href="index.html" class="logo"><h2 class="text-white">BUIESPACE</h2></a>
+					<!-- <h2 class="text-white">Explore BUIESPACE</h2> -->
+					<div class="line-divider"></div>
+					<div class="form-wrapper">
+						<p class="signup-text">Enter your details to Login</p>
+						<form method="POST">
+                        {% csrf_token %} 
+							<fieldset class="form-group">
+								<input type="text" class="form-control" id="example-email" name="username" placeholder="Enter username">
+							</fieldset>
+							<fieldset class="form-group">
+								<input type="password" class="form-control" id="example-password" name="password" placeholder="Enter password password">
+							</fieldset>
+							<fieldset class="form-group">
+								<input class="btn-secondary" type="submit" value="submit">
+							</fieldset>
+						</form>
+					</div>
+					<a href="{% url "signup" %}">Don't have an account?</a>
+		</section>
+
+
+{% endblock  %}
